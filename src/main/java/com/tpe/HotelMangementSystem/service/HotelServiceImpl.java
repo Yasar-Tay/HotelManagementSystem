@@ -3,7 +3,6 @@ package com.tpe.HotelMangementSystem.service;
 import com.tpe.HotelMangementSystem.exception.HotelResourceNotFoundException;
 import com.tpe.HotelMangementSystem.model.Hotel;
 import com.tpe.HotelMangementSystem.repository.HotelRepository;
-import com.tpe.HotelMangementSystem.repository.HotelRepositoryImpl;
 
 import java.util.List;
 import java.util.Scanner;
@@ -25,7 +24,6 @@ public class HotelServiceImpl implements HotelService{
     //stp13d: saveHotel
     @Override
     public Hotel saveHotel() {
-
 
         scanner= new Scanner(System.in);
         Hotel hotel= new Hotel();

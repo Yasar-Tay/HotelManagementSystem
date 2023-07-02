@@ -15,8 +15,7 @@ public class HotelRepositoryImpl implements HotelRepository{
     @Override
     public Hotel saveHotel(Hotel hotel) {
 
-        try (
-            Session session = HibernateUtils.getSessionFactory().openSession()){
+        try (Session session = HibernateUtils.getSessionFactory().openSession()){
               Transaction transaction = session.beginTransaction();
 
               session.save(hotel);
