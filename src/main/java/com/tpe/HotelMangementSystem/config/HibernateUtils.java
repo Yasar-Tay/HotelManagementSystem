@@ -1,5 +1,8 @@
 package com.tpe.HotelMangementSystem.config;
 
+
+import com.tpe.HotelMangementSystem.model.Hotel;
+import com.tpe.HotelMangementSystem.model.Room;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -18,7 +21,7 @@ public class HibernateUtils {
             sessionFactory=configuration.buildSessionFactory();
         }catch (Throwable ex){
             System.err.println("Initial SessionFactory creation is failed ...."+ex);
-            throw new ExceptionInInitializerError(ex);
+            throw  new ExceptionInInitializerError(ex);
         }
 
     }
@@ -28,6 +31,8 @@ public class HibernateUtils {
     public static SessionFactory getSessionFactory(){
         return sessionFactory;
     }
+
+
 
     public static void shutDown(){
         getSessionFactory().close();

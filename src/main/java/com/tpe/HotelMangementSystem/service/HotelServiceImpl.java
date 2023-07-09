@@ -3,6 +3,7 @@ package com.tpe.HotelMangementSystem.service;
 import com.tpe.HotelMangementSystem.exception.HotelResourceNotFoundException;
 import com.tpe.HotelMangementSystem.model.Hotel;
 import com.tpe.HotelMangementSystem.repository.HotelRepository;
+import com.tpe.HotelMangementSystem.repository.HotelRepositoryImpl;
 
 import java.util.List;
 import java.util.Scanner;
@@ -24,6 +25,7 @@ public class HotelServiceImpl implements HotelService{
     //stp13d: saveHotel
     @Override
     public Hotel saveHotel() {
+
 
         scanner= new Scanner(System.in);
         Hotel hotel= new Hotel();
@@ -115,6 +117,30 @@ public class HotelServiceImpl implements HotelService{
         }
     }
 
+
+    //17d :updateHotelByID
+    @Override
+    public void updateHotelByID(Long id, Hotel updateHotel) throws HotelResourceNotFoundException {
+
+        try {
+           Hotel existingHotel = hotelRepository.findHotelById(id);
+           if (existingHotel==null){
+               throw new HotelResourceNotFoundException("Hotel not found With Id : "+id);
+           }
+
+           existingHotel.setName(updateHotel.getName());
+           existingHotel.setName(updateHotel.getName());
+
+           hotelRepository.updateHotel(existingHotel);
+
+            System.out.println("Hotel updated Successfully ...");
+
+        }catch (HotelResourceNotFoundException e){
+            System.out.println(e.getMessage());
+
+        }
+
+    }
 
 
 }

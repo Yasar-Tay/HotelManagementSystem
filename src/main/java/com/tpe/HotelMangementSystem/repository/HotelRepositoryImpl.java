@@ -15,7 +15,8 @@ public class HotelRepositoryImpl implements HotelRepository{
     @Override
     public Hotel saveHotel(Hotel hotel) {
 
-        try (Session session = HibernateUtils.getSessionFactory().openSession()){
+        try (
+            Session session = HibernateUtils.getSessionFactory().openSession()){
               Transaction transaction = session.beginTransaction();
 
               session.save(hotel);
@@ -69,6 +70,31 @@ public class HotelRepositoryImpl implements HotelRepository{
             List<Hotel>  hotels  = session.createQuery("FROM Hotel",Hotel.class).getResultList();
              return hotels;
             //return session.createQuery("FROM Hotel",Hotel.class).getResultList();
+    }
+
+
+    //17b :updateHotel
+
+    @Override
+    public void updateHotel(Hotel hotel) {
+
+        try (Session session=HibernateUtils.getSessionFactory().openSession()){
+
+            Transaction transaction= session.beginTransaction();
+
+            //load the Hotel Entity using same session
+
+            Hotel existingHotel= session.load(Hotel.class,hotel.getId());
+            if (existingHotel!=null){
+                existingHotel.setName(hotel.getName());
+                existingHotel.setLocation(hotel.getLocation());
+                session.update(existingHotel);
+            }
+            transaction.commit();
+        }catch (HibernateException e){
+            e.printStackTrace();
+        }
+
     }
 
 }
